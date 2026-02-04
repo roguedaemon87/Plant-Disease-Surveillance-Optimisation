@@ -65,7 +65,7 @@ from CONSTANT import ALPHA, BETA, SIGMA0, LOGISTIC_RATE, PREVALENCE
 if __name__ == '__main__':
 
     dir_home = PROJECT_ROOT
-    cwd = PROJECT_ROOT / "main_analysis" / "code" / "simulations"
+    cwd = PROJECT_ROOT / "main_analysis" / "Outputs" / "simulations"
     cwd.mkdir(parents=True, exist_ok=True)
     
     dir_area = PROJECT_ROOT / "main_analysis" / "host_distributions"
