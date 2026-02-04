@@ -40,7 +40,7 @@ import sys
 from pathlib import Path
 # --- PATH SETUP: make local modules importable ---
 THIS_FILE = Path(__file__).resolve()
-PROJECT_ROOT = THIS_FILE.parents[2]  # ana00_runSimulation/run_sims.py (or main_analysis/code/simulations/...) -> repo root
+PROJECT_ROOT = THIS_FILE.parents[3]  # ana00_runSimulation/run_sims.py (or main_analysis/code/simulations/...) -> repo root
 sys.path.insert(0, str(PROJECT_ROOT))
 
 # USER: if auto-detection fails, uncomment and set manually:
