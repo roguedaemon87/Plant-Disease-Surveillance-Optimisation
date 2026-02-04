@@ -63,7 +63,7 @@ and then specified in CONSTANT.py for the main analysis.
 Core model files
 ---------------------------------------------------------------------------
 
-At the top level of the repository are three core Python files that define the
+In this root directory of the repository are three core Python files that define the
 model behaviour and are used by both main_analysis and beta_parameterisation:
 
 - simulation.py
