@@ -30,9 +30,25 @@ Code:
     - optimise surveillance site locations
     - generate summary results and figures
 
+- main_analysis/code/optimisation/outlier_cases/
+  Diagnostic scripts used to investigate specific outlier configurations where
+  simple road accessibility metrics performed poorly. These analyses are
+  supplementary and are not required to reproduce the main manuscript results.
+
 Users interested only in reproducing the manuscript results should focus on
 the main_analysis folder.
 
+
+Execution order (main analysis):
+--------------------------------
+1. Run epidemic simulations:
+   main_analysis/code/simulations/run_sims.py
+
+2. Optimise surveillance site locations:
+   main_analysis/code/optimisation/
+
+3. Generate figures and summaries:
+   main_analysis/code/figure_generation/
 
 ---------------------------------------------------------------------------
 2) beta_parameterisation/
@@ -63,7 +79,7 @@ and then specified in CONSTANT.py for the main analysis.
 Core model files
 ---------------------------------------------------------------------------
 
-In this root directory of the repository are three core Python files that define the
+In the root directory of the repository are three core Python files that define the
 model behaviour and are used by both main_analysis and beta_parameterisation:
 
 - simulation.py
@@ -88,6 +104,21 @@ results reported in the manuscript.
 
 
 ---------------------------------------------------------------------------
+Quick start
+---------------------------------------------------------------------------
+
+To reproduce the main manuscript results:
+
+1. Run simulations:
+   python main_analysis/code/simulations/run_sims.py <AREA_ID>
+
+2. Run optimisation scripts in:
+   main_analysis/code/optimisation/
+
+See individual script headers for required arguments.
+
+
+---------------------------------------------------------------------------
 Notes
 ---------------------------------------------------------------------------
 
@@ -95,5 +126,6 @@ Notes
 - Raw GIS shapefiles used for beta calibration are not included due to file size
   constraints.
 - All paths in scripts are relative to this repository.
+- Outlier case analyses are supplementary diagnostics.
 
 For questions about the code or data, please contact the corresponding author.
