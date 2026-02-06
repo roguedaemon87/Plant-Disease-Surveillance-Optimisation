@@ -1,15 +1,31 @@
-Outlier case investigations for road-based surveillance metrics.
+Outlier case analysis
+--------------------
 
-These scripts were used to examine specific scenarios in which simple road-based
-accessibility metrics did not accurately predict surveillance performance.
+This folder contains diagnostic scripts used to investigate specific cases
+where simple road accessibility metrics performed poorly.
 
-The cases focus on:
-- area01 with road patterns 01_0 and 01_1
-- area05 with road patterns 05_0, 05_1, and 05_2
+Workflow:
 
-These configurations were identified as outliers and analysed to understand why
-high-risk host locations can be poorly detected despite apparently sufficient
-road coverage.
+1. run_sims_outlier_cases.py
+   Runs epidemic simulations for selected host distributions (area01, area05).
 
-This folder contains diagnostic case studies and is not required to reproduce
+2. optimise_sites_with_roads_outlier_cases.py
+   Optimises surveillance locations constrained to specific road networks.
+
+3. optimise_sites_no_roads_outlier_cases.py
+   Computes an idealised baseline (no road constraints).
+
+4. optimise_sites_with_roads_outlier_cases_legacy.py
+   Legacy exploratory script retained for provenance only.
+
+Inputs:
+- host distributions:
+    inputs/host_distributions/
+- road networks:
+    inputs/road_patterns/
+
+Outputs:
+- main_analysis/Outputs/outlier_cases/
+
+These analyses are supplementary diagnostics and are not required to reproduce
 the main manuscript results.
