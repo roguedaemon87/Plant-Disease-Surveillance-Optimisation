@@ -33,12 +33,3 @@ Scripts used to:
 - Perform additional diagnostic and comparison analyses  
 
 See `main_analysis/code/README.md` for detailed workflow descriptions.
-
----
-
-## Optional Workflows
-
-The beta calibration workflow is located separately in:
-beta_parameterisation/
-
-This workflow is not required to reproduce the main manuscript results.
