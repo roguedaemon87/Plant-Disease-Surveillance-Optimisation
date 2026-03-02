@@ -31,11 +31,11 @@ code/
       optimisation module, with added checkpointing support in simulated_annealing()
       so long runs can be resumed.
 
-  - ana11_opt.py
+  - optimise_sites_with_roads_nigeria.py
       Driver script for road-constrained optimisation (surveillance locations
       restricted to road-accessible host cells). Uses checkpointing.
 
-  - ana11_opt_NoRoad.py
+  - optimise_sites_no_roads_nigeria.py
       Driver script for no-road baseline optimisation (surveillance locations
       can be placed anywhere on the host grid). Uses checkpointing.
 
