@@ -45,7 +45,7 @@ This folder contains everything required to reproduce the main manuscript result
   These analyses are supplementary and are **not required** to reproduce the
   main manuscript results.
 
-- 'main_analysis/code/nigieria_comparison/'
+- `main_analysis/code/nigeria_comparison/`  
   Nigeria comparison analysis.
   Contains the inputs, simulation and optimisation workflows used to compare
   Nigerian road networks with those of the DRC.
