@@ -79,6 +79,7 @@ from scipy.spatial.distance import cdist
 import pickle
 
 #ROAD=ROAD_JA
+AREA = AREA_JA
 NSITES = NSITES_JA  # number of sites to choose for surveillance
 SURVEY_FREQ=SURVEY_FREQ_JA
 

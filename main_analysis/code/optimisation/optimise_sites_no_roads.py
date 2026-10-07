@@ -45,10 +45,9 @@ sys.path.insert(0, str(PROJECT_ROOT))
 # USER: if auto-detection fails, uncomment and set manually:
 # PROJECT_ROOT = Path(r"/path/to/your/repository")
 
-ROAD_JA = sys.argv[1]  #20p, 30p, 40p
-AREA_JA = sys.argv[2]
-SURVEY_FREQ_JA = int(sys.argv[3])  # 52, 26, 17 (once a year, twice a year, thrice a year)
-NSITES_JA=int(sys.argv[4])  # 5, 10, 15
+AREA_JA = sys.argv[1]
+SURVEY_FREQ_JA = int(sys.argv[2])  # 52, 26, 17 (once a year, twice a year, thrice a year)
+NSITES_JA=int(sys.argv[3])  # 5, 10, 15
 #P_DETECT_JA = float(sys.argv[1])  # 0.25, 0.5, 0.75, or 0.9  (job array values used for P_DETECT)
 
 task_id = os.environ.get('SLURM_ARRAY_TASK_ID')
@@ -81,8 +80,6 @@ cwd = PROJECT_ROOT / "main_analysis" / "Outputs" / "optimisation"
 subdir_sim='main_analysis/Outputs/simulations/'
 filename_sim=f'df_sims{AREA_JA}.joblib'
 
-subdir_road='main_analysis/road_patterns/'
-filename_road=f'roadnetwork{ROAD_JA}.shp'
 
 save_dir_metric = f'output_metric_sfreq{SURVEY_FREQ_JA}_nsite{NSITES_JA}/'
 save_dir_map = 'output_map/'
@@ -127,7 +124,6 @@ host_positions = np.column_stack((host_xpos, host_ypos))
 host_population=sim_data[0]['host_population']
 
 ### Obtain road
-shp_road = read_road(file_dir= os.path.join(dir_home, subdir_road, filename_road))
 site_loc_allowed_ID, cells_near_road_ID = site_loc_allowed(roadnetwork=None, host_pos=host_positions, host_pop=host_population, accessible_dist=1000)  # 1km accessibility
 
 
