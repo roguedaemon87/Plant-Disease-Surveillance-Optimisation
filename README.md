@@ -6,6 +6,30 @@ associated manuscript.
 
 ---
 
+# Data
+
+Everything needed to reproduce every figure and reported value in the manuscript
+is in this repository, including the host distributions, the road networks, the
+spread simulations for the eight sub-landscapes, the hotspot test cases and all
+optimisation outputs.
+
+Two sets of simulation inputs are too large to host here and are deposited at
+<https://doi.org/10.5281/zenodo.23214313>:
+
+| Archive | Extract into |
+|---|---|
+| `noise_test_simulations.7z` | `main_analysis/Outputs/noise_test/simulations/` |
+| `nigeria_simulations.7z` | `main_analysis/code/nigeria_comparison/Outputs/simulations/` |
+
+Neither is required to reproduce the published results. The outputs computed from
+them are committed here, in `main_analysis/Outputs/noise_test/noise_test_scores.csv`
+and under `main_analysis/code/nigeria_comparison/Outputs/`.
+
+The raw GIS layers behind the beta parameterisation are not distributed. See
+`beta_parameterisation/shapefiles_raw/README.md`.
+
+---
+
 # Repository Structure
 
 The repository is organised into two primary analytical workflows:
@@ -132,7 +156,8 @@ To reproduce the main manuscript results:
 # Notes
 
 - The beta parameterisation workflow is optional.
-- Raw GIS shapefiles used for beta calibration are not included due to file size constraints.
+- Raw GIS shapefiles used for beta calibration are not included; see `beta_parameterisation/shapefiles_raw/README.md`.
+- Two sets of simulation inputs are deposited separately; see the Data section above.
 - All script paths are relative to the repository root.
 - Outlier case analyses are supplementary diagnostics.
 - For questions about the code or data, please contact the corresponding author.
