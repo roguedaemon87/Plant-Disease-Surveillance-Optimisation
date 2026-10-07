@@ -43,6 +43,12 @@ the main analysis automatically.
 import os
 os.environ["OMP_NUM_THREADS"] = "1"  # avoid oversubscription in linear algebra libs
 import sys
+from pathlib import Path
+# --- PATH SETUP: make local modules importable ---
+THIS_FILE = Path(__file__).resolve()
+PROJECT_ROOT = THIS_FILE.parents[2]  # repo root (beta_parameterisation/code/script.py)
+sys.path.insert(0, str(PROJECT_ROOT))
+
 
 from multiprocessing import Pool
 import pandas as pd
@@ -57,16 +63,16 @@ from scipy.spatial.distance import pdist, squareform
 from joblib import dump, load
 from simulation import host_distribution_casava, simulate_ibm, logistic
 from CONSTANT import ALPHA, BETA, SIGMA0, LOGISTIC_RATE, PREVALENCE
-from pathlib import Path
-
-THIS_FILE = Path(__file__).resolve()
-PROJECT_ROOT = THIS_FILE.parents[2]   # repo root (beta_parameterisation/code/script.py)
-sys.path.insert(0, str(PROJECT_ROOT))
 
 # USER: change this manually if needed
 # PROJECT_ROOT = Path(r"/path/to/your/repository")
 
 SHAPEFILE_DIR = PROJECT_ROOT / "beta_parameterisation" / "shapefiles_raw"
+
+# USER: the two raw shapefiles are not distributed with this repository
+# (see shapefiles_raw/README.md). Set these to the filenames you place there.
+ROAD_SHP_NAME = ""   # road network shapefile for northern DRC, e.g. "roads_NDRC.shp"
+AREA_SHP_NAME = ""   # cassava production shapefile for northern DRC, e.g. "production_NDRC.shp"
 OUTPUT_DIR = PROJECT_ROOT / "beta_parameterisation" / "Outputs"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 

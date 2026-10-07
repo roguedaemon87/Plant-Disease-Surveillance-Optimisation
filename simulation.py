@@ -41,6 +41,7 @@ from joblib import dump, load
 import geopandas as gpd
 from shapely.geometry import LineString, Point, MultiLineString, box
 from shapely.ops import unary_union
+from shapely.affinity import translate
 import os
 from CONSTANT import ALPHA, BETA, SIGMA0, LOGISTIC_RATE, PREVALENCE, SURVEY_FREQ, P_DETECT, NTREES_SURVEY, PREV_FINAL
 

@@ -19,6 +19,11 @@ sys.path.insert(0, str(PROJECT_ROOT))
 # PROJECT_ROOT = Path(r"/path/to/your/repository")
 
 SHAPEFILE_DIR = PROJECT_ROOT / "beta_parameterisation" / "shapefiles_raw"
+
+# USER: the two raw shapefiles are not distributed with this repository
+# (see shapefiles_raw/README.md). Set these to the filenames you place there.
+ROAD_SHP_NAME = ""   # road network shapefile for northern DRC, e.g. "roads_NDRC.shp"
+AREA_SHP_NAME = ""   # cassava production shapefile for northern DRC, e.g. "production_NDRC.shp"
 OUTPUT_DIR = PROJECT_ROOT / "beta_parameterisation" / "Outputs"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 

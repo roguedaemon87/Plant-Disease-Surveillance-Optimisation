@@ -50,6 +50,7 @@ import os
 #os.environ["OMP_NUM_THREADS"] = "1"  # limit each process to 1 thread
 #os.environ["OPENBLAS_NUM_THREADS"] = "1"
 #os.environ["MKL_NUM_THREADS"] = "1"
+import sys
 from pathlib import Path
 THIS_FILE = Path(__file__).resolve()
 PROJECT_ROOT = THIS_FILE.parents[3]  # because file will live in main_analysis/code/optimisation/
@@ -90,10 +91,6 @@ import pickle
 
 dir_home = PROJECT_ROOT
 cwd = PROJECT_ROOT / "main_analysis" / "Outputs" / "optimisation"
-os.makedirs(os.path.join(cwd, save_dir_metric), exist_ok=True)
-os.makedirs(os.path.join(cwd, save_dir_map), exist_ok=True)
-os.makedirs(os.path.join(cwd, save_dir_trace), exist_ok=True)
-os.makedirs(os.path.join(cwd, save_dir_config), exist_ok=True)
 
 subdir_sim='main_analysis/Outputs/simulations/'
 filename_sim=f'df_sims{AREA_JA}.joblib'
@@ -105,6 +102,11 @@ save_dir_metric = f'output_metric_sfreq{SURVEY_FREQ_JA}_nsite{NSITES_JA}/'
 save_dir_map = 'output_map/'
 save_dir_trace = 'output_trace/'
 save_dir_config = 'output_config/'  #+++
+
+os.makedirs(os.path.join(cwd, save_dir_metric), exist_ok=True)
+os.makedirs(os.path.join(cwd, save_dir_map), exist_ok=True)
+os.makedirs(os.path.join(cwd, save_dir_trace), exist_ok=True)
+os.makedirs(os.path.join(cwd, save_dir_config), exist_ok=True)
 
 filename_save = f'road{ROAD_JA}_area{AREA_JA}_surveyfreq{SURVEY_FREQ_JA}_nsites{NSITES_JA}'
 
