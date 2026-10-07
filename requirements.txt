@@ -7,15 +7,10 @@
 
 numpy==2.4.6
 scipy==1.17.1
+pandas==3.0.5
+geopandas==1.1.4
 shapely==2.1.2
 matplotlib==3.11.1
 joblib==1.5.3
-
-# VERSION TO BE CONFIRMED before release
-geopandas==1.14
-
-# Used by the analysis scripts but not pinned in the manuscript.
-# VERSIONS TO BE CONFIRMED before release
-pandas
-tqdm
-dcor
+dcor==0.7
+tqdm==4.70.0
