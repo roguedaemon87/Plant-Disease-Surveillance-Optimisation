@@ -70,11 +70,11 @@ def objective(data_sim, configID, t_star_arr, survey_times):
         ID_infected = np.where(sim['state'] != 'S')[0]
         if np.intersect1d(configID, ID_infected).size == 0:
             continue
-        _, prop_inC, _, prop_inI = logistic_forOpt(
+        _, _, _, prop_inI = logistic_forOpt(
             survey_times[s], sim['time_1st_S2C'][configID],
             sim['time_1st_C2I'][configID], host_population,
             SIGMA0, LOGISTIC_RATE)
-        prop_detectable = prop_inC + prop_inI
+        prop_detectable = prop_inI
         mtrees = np.clip(host_population, a_min=1, a_max=NTREES_SURVEY)
         P_arr[s] = 1 - np.prod((1 - P_DETECT * prop_detectable) ** mtrees)
     return P_arr.mean()

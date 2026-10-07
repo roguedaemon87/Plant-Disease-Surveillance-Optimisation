@@ -175,7 +175,7 @@ def objective_optimised(data_sim,
                                                                                    host_population=host_population, 
                                                                                    sigma0=SIGMA0, 
                                                                                    c=LOGISTIC_RATE) #this gives 4 arrays, each have dimension len(time) * num(cells)
-        prop_detectable = host_prop_inC + host_prop_inI         # proportion of hosts detectable in the config at time t
+        prop_detectable = host_prop_inI         # proportion of hosts detectable in the config at time t. Only symptomatic plants are visible to inspection, so cryptic infections are excluded.
         mtrees_survey = np.clip(host_population, a_min=1, a_max=ntrees_survey)     # number of trees to survey across all sites in config
         f2 = (1- P_detect * prop_detectable)**mtrees_survey     # P(fail to detect disease from each site)
         G = np.prod(f2)             # P(fail to detect across all survey sites across all survey times in the current simulation s)
@@ -229,7 +229,7 @@ def objective_more_optimised(data_sim,
                                                                                     host_population=host_population, 
                                                                                     sigma0=SIGMA0, 
                                                                                     c=LOGISTIC_RATE) #this gives 4 arrays, each have dimension len(time) * num(cells)
-            prop_detectable = host_prop_inC + host_prop_inI         # proportion of hosts detectable in the config at time t
+            prop_detectable = host_prop_inI         # proportion of hosts detectable in the config at time t. Only symptomatic plants are visible to inspection, so cryptic infections are excluded.
             mtrees_survey = np.clip(host_population, a_min=1, a_max=ntrees_survey)     # number of trees to survey across all sites in config
             f2 = (1- P_detect * prop_detectable)**mtrees_survey     # P(fail to detect disease from each site)
             G = np.prod(f2)             # P(fail to detect across all survey sites across all survey times in the current simulation s)
@@ -295,7 +295,7 @@ def objective(data_sim,
                                                                                 host_population = host_population,
                                                                                 sigma0 = SIGMA0,
                                                                                 c = LOGISTIC_RATE) 
-            prop_detectable = host_prop_inC + host_prop_inI         # proportion of hosts detectable in the config at time t
+            prop_detectable = host_prop_inI         # proportion of hosts detectable in the config at time t. Only symptomatic plants are visible to inspection, so cryptic infections are excluded.
             mtrees_survey = np.clip(host_population, a_min=1, a_max=ntrees_survey)     # number of trees to survey across all sites in config
             f2 = (1- P_detect * prop_detectable)**mtrees_survey     # P(fail to detect disease from each site)
             F2 = np.prod(f2)                                        # P(fail to detect disease across all sites)
