@@ -148,6 +148,7 @@ for ax, shp, cfg, letter, level, oop in panels:
         im0 = im
     if shp is not None:
         shp.plot(ax=ax, color='black', linewidth=2, alpha=0.5)
+        ax.set_xlabel(''); ax.set_ylabel('')   # geopandas sets these from the CRS
     ax.scatter(host_positions[cfg, 0], host_positions[cfg, 1],
                marker='x', s=30, c='black')
     ax.set_title(f"Accessibility constraint: {level.lower()}\n"

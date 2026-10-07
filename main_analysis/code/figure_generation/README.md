@@ -13,6 +13,7 @@ Output is written to `main_analysis/Outputs/figures/`.
 
 | Script | Produces | Reads |
 |---|---|---|
+| `figure2.py` | Figure 2, host distributions, road networks and infection probabilities for two sub-landscapes | host distributions, road networks, infection visit counts |
 | `figure3.py` | Figure 3, dispersal distance distribution, and Figure S6, the same by sub-landscape | dispersal distances |
 | `figure4.py` | Figure 4, optimal sites and annealing traces under three accessibility scenarios | optimisation, host distributions, road networks, infection visit counts |
 | `figure5.py` | Figure 5, correlation strength between the twelve road network metrics and OOP | optimisation, host distributions |
@@ -51,12 +52,13 @@ repository README.
 
 ## Figures not produced here
 
-Figures 1 and 2, and Supplementary Figures S1 and S2, are reproduced
-photographs or maps drawn in GIS rather than computed, so they have no
-script. Everything else in the manuscript is produced by the scripts above.
+Figure 1 and Supplementary Figures S1 and S2 are reproduced photographs or
+maps drawn in GIS rather than computed, so they have no script. Everything
+else in the manuscript is produced by the scripts above.
 
-## Inputs not in the repository
+## A note on the figures as published
 
-Two scripts need inputs that are not committed. `figure3.py` reads
-`dispersal_distances.joblib`, and `figureS8.py` reads
-`noise_test_scores.csv`, which is written by a separate scoring script.
+The published figures were adjusted by hand after being generated, mainly
+to reposition colourbars and enlarge labels for print. These scripts
+reproduce the content of each figure, not every typographic detail of the
+version that appears in the journal.

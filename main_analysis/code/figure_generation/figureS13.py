@@ -149,6 +149,7 @@ for ax, c in zip(map_axes, cases):
                     linewidths=0, c=L['prob'][non0], cmap='RdYlGn_r',
                     vmin=0, vmax=vmax, alpha=0.85)
     c['shp'].plot(ax=ax, color='black', linewidth=1.6, alpha=0.7)
+    ax.set_xlabel(''); ax.set_ylabel('')   # geopandas sets these from the CRS
     ax.scatter(L['pos'][c['config'], 0], L['pos'][c['config'], 1],
                marker='x', s=22, c='black', linewidths=1.1)
     ax.set_xlim(0, 50000)

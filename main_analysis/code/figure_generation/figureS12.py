@@ -147,6 +147,7 @@ for j, (_, row) in enumerate(anomalies.iterrows()):
     im_pop = ax.scatter(pos[non0, 0], pos[non0, 1], marker='s', s=14,
                         linewidths=0, c=pop[non0], cmap='RdYlGn_r', alpha=0.85)
     shp.plot(ax=ax, color='black', linewidth=1.4, alpha=0.7)
+    ax.set_xlabel(''); ax.set_ylabel('')   # geopandas sets these from the CRS
     ax.set_title(f"area {row['area']}, road {row['road']}\n"
                  f"RCP = {row['RCP']:.3f},  OOP = {row['OOP']:.3f}",
                  fontsize=11)
@@ -157,6 +158,7 @@ for j, (_, row) in enumerate(anomalies.iterrows()):
                         linewidths=0, c=visit[non0] / N_SIMS,
                         cmap='RdYlGn_r', alpha=0.85)
     shp.plot(ax=ax, color='black', linewidth=1.4, alpha=0.7)
+    ax.set_xlabel(''); ax.set_ylabel('')   # geopandas sets these from the CRS
 
     for ax in (axes[0, j], axes[1, j]):
         ax.set_aspect('equal')

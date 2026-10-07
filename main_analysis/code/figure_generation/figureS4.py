@@ -95,6 +95,7 @@ for r, (label, members) in enumerate(SERIES):
         net = members[c]
         shp = gpd.read_file(os.path.join(DIR_ROAD, f"roadnetwork{net}.shp"))
         shp.plot(ax=ax, color='black', linewidth=1.0)
+        ax.set_xlabel(''); ax.set_ylabel('')   # geopandas sets these from the CRS
         print(f"{net}: {shp.geometry.length.sum()/1000:7.1f} km")
 
         ax.set_title(net, fontsize=11)
