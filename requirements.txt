@@ -16,5 +16,4 @@ dcor==0.7
 tqdm==4.70.0
 
 # used by figureS9.py for the correlation heatmap
-# VERSION TO BE CONFIRMED
-seaborn
+seaborn==0.13.2
