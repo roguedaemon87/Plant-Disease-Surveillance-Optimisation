@@ -25,6 +25,7 @@ import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
+from matplotlib.ticker import FuncFormatter
 from joblib import load
 
 from pathlib import Path
@@ -213,9 +214,15 @@ print(f"  objective range: {stats['objective'].min():.4f} - "
       f"{stats['objective'].max():.4f}")
 
 # ---------------------------------------------------------------- figure
+# type sizes, as used for the published figure
+FS_TICK, FS_LABEL, FS_TITLE, FS_LETTER, FS_LEGEND = 14, 16, 18, 20, 15
+
+# commas separate thousands on the simulation-count axis
+COMMA = FuncFormatter(lambda v, p: f"{v:,.0f}")
+
 # 2 x 4 sub-landscapes; each occupies a running-mean panel above an MCSE panel,
 # with a spacer row separating the two blocks
-fig = plt.figure(figsize=(16, 12), dpi=300)
+fig = plt.figure(figsize=(19, 14), dpi=300)
 gs = fig.add_gridspec(5, 4, height_ratios=[1.4, 1, 0.32, 1.4, 1],
                       hspace=0.12, wspace=0.28)
 BLOCK_ROWS = [(0, 1), (3, 4)]
@@ -247,22 +254,24 @@ for k, area in enumerate(AREAS):
         ax_s.plot(M[pos], mcse[pos], lw=0.9, color=c)
 
     ax_m.set_ylim(0, top * 1.05)
-    ax_m.set_title(f"Sub-landscape {area}", fontsize=11)
-    ax_m.text(-0.18, 1.12, f"{letters[k]}.", transform=ax_m.transAxes,
-              fontsize=14, fontweight=700, va='top', ha='left')
+    ax_m.set_title(f"Sub-landscape {area}", fontsize=FS_TITLE)
+    ax_m.text(-0.26, 1.14, f"{letters[k]}.", transform=ax_m.transAxes,
+              fontsize=FS_LETTER, fontweight=700, va='top', ha='left')
     ax_m.tick_params(labelbottom=False)
     ax_s.set_yscale('log')
 
     for ax in (ax_m, ax_s):
         ax.spines[['top', 'right']].set_visible(False)
+        ax.tick_params(labelsize=FS_TICK)
+        ax.xaxis.set_major_formatter(COMMA)
 
     if col == 0:
-        ax_m.set_ylabel('Objective estimate')
-        ax_s.set_ylabel('MCSE')
+        ax_m.set_ylabel('Objective estimate', fontsize=FS_LABEL)
+        ax_s.set_ylabel('MCSE', fontsize=FS_LABEL)
     if block == 0:
         ax_s.tick_params(labelbottom=False)
     else:
-        ax_s.set_xlabel('Number of simulations ($M$)')
+        ax_s.set_xlabel('Number of simulations ($M$)', fontsize=FS_LABEL)
 
 # common y-range for the MCSE panels so they are comparable
 lo = min(ax.get_ylim()[0] for ax in mcse_axes)
@@ -274,7 +283,7 @@ handles = [plt.Line2D([], [], color=colours[l], lw=1.5) for l in colours]
 fig.legend(handles, ["Ten randomly selected populated cells",
                      "Ten most densely populated cells"],
            loc='upper center', bbox_to_anchor=(0.5, 0.995), ncol=2,
-           frameon=False, fontsize=11)
+           frameon=False, fontsize=FS_LEGEND)
 
 fig.subplots_adjust(left=0.06, right=0.99, top=0.93, bottom=0.05)
 fig.savefig(OUT_PNG)
