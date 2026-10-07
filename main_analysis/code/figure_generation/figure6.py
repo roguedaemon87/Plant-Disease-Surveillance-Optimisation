@@ -49,7 +49,6 @@ DIR_NIG   = PROJECT_ROOT / "main_analysis" / "code" / "nigeria_comparison" / "Ou
 DIR_OUT   = PROJECT_ROOT / "main_analysis" / "Outputs" / "figures"
 
 DIR_METRIC = DIR_OPT / "output_metric_sfreq52_nsite10"
-DIR_DISTR = DIR_DISTR
 DIR_NIG = DIR_NIG / "output_metric"
 OUT_PNG = os.path.join(DIR_OUT, "Figure6.png")
 OUT_CSV = os.path.join(DIR_OUT, "Figure6_data.csv")

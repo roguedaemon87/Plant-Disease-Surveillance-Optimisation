@@ -40,9 +40,6 @@ DIR_OUT   = PROJECT_ROOT / "main_analysis" / "Outputs" / "figures"
 DIR_CONFIG = DIR_OPT / "output_config"
 DIR_TRACE  = DIR_OPT / "output_trace"
 DIR_METRIC = DIR_OPT / "output_metric_sfreq52_nsite10"
-DIR_DISTR  = DIR_DISTR
-DIR_VISIT  = DIR_VISIT
-DIR_ROAD   = DIR_ROAD
 
 OUT_PNG = os.path.join(DIR_OUT, "Figure4.png")
 

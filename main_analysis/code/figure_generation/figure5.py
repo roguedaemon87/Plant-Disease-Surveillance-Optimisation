@@ -39,8 +39,6 @@ DIR_VISIT = PROJECT_ROOT / "main_analysis" / "Outputs" / "infection_visit_counts
 DIR_NIG   = PROJECT_ROOT / "main_analysis" / "code" / "nigeria_comparison" / "Outputs"
 DIR_OUT   = PROJECT_ROOT / "main_analysis" / "Outputs" / "figures"
 
-DIR_OPT   = DIR_OPT
-DIR_DISTR = DIR_DISTR
 OUT_PNG = os.path.join(DIR_OUT, "Figure5.png")
 OUT_CSV_K = os.path.join(DIR_OUT, "Figure5_kendall.csv")
 OUT_CSV_D = os.path.join(DIR_OUT, "Figure5_dcor.csv")

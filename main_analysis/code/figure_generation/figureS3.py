@@ -34,7 +34,6 @@ DIR_ROAD  = PROJECT_ROOT / "main_analysis" / "road_patterns"
 DIR_VISIT = PROJECT_ROOT / "main_analysis" / "Outputs" / "infection_visit_counts"
 DIR_NIG   = PROJECT_ROOT / "main_analysis" / "code" / "nigeria_comparison" / "Outputs"
 DIR_OUT   = PROJECT_ROOT / "main_analysis" / "Outputs" / "figures"
-DIR_DISTR = DIR_DISTR
 OUT_PNG = os.path.join(DIR_OUT, "FigureS3.png")
 
 CAP_PERCENTILE = 99      # colour scale cap, percentile of non-zero cells
