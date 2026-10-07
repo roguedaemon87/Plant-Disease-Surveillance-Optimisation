@@ -60,10 +60,10 @@ from shapely.ops import unary_union
 from tqdm import tqdm
 from scipy.spatial.distance import cdist
 
-### change: SURVEY_FREQ, number of simulations used
+
 
 ### Read road network ===============================================
-### amuse yourself with this :)
+
 def read_road(file_dir):
     road = gpd.read_file(file_dir)
     return road
@@ -242,7 +242,7 @@ def objective_more_optimised(data_sim,
     return objective_val
 
 
-### Objective function (TOO SLOW. DO NOT USE) ===============================================
+### Objective function (reference implementation, superseded by the two above) ===============================================
 def objective(data_sim,  
               configID, # prop_detectable, #t_star,
               ntrees_survey, P_detect, survey_freq):
@@ -314,9 +314,19 @@ def objective(data_sim,
 ### SIMULATED ANNEALING ==========================================================================
 def simulated_annealing(data_sim, obj_fun, site_loc_allowed, config0, 
                         n_iterations, init_temperature, cooling_rate,
-                        ntrees_survey, P_detect, survey_freq, 
-                        lastN=5000, earlystop_tol=0.001
+                        ntrees_survey, P_detect, survey_freq,
+                        min_iterations=30000, lastN=5000, earlystop_tol=0.001
                         ):
+    """
+    Maximise the detection objective over surveillance site configurations.
+
+    The search runs for at most n_iterations. From min_iterations onwards it
+    stops early once the objective has settled, defined as the largest absolute
+    change across the last lastN recorded values falling below earlystop_tol.
+
+    Returns the final configuration, the full trace of configurations,
+    temperatures and objective values, and the index of the last iteration run.
+    """
    
     num_sites = len(config0)
     ### evaluate objective value on the initial config
@@ -335,9 +345,9 @@ def simulated_annealing(data_sim, obj_fun, site_loc_allowed, config0,
     #for i in tqdm(range(n_iterations)):
     for i in range(n_iterations):
         if i%1000==0: print(f"Iteration {i} at time=", datetime.datetime.now(), f"config={config_curr}, objective={objVal_curr:.4f}", flush=True)
-        ### Early stopping
-        if i>=30000: 
-            # calclulate the variation in the last 5000 objective values
+        ### Early stopping, once the minimum number of iterations has been run
+        if i>=min_iterations:
+            # largest absolute change across the last lastN objective values
             lastNtrial=np.array(objVal_list[-lastN:])
             maxAbsChanges=abs(np.diff(lastNtrial)).max()
             if maxAbsChanges < earlystop_tol: break
@@ -358,10 +368,11 @@ def simulated_annealing(data_sim, obj_fun, site_loc_allowed, config0,
             config_curr, objVal_curr = config_candidate, objVal_candidate
         else:                                                       # decide to acccept or reject
             
-            diff = objVal_candidate - objVal_curr                   # calculate the difference in objective values
-            # temp_curr = temp_curr / float(i+1)                      # calculate temperature of current iteration. Is this fast annealing schedule?????????????
-            # acceptance_rate = np.exp(-diff / temp_curr)             # check if this is correct!!! - this is for minimisation, but we are maximising the objective function.
-            acceptance_rate = np.exp(diff / temp_curr)             # check if this is correct!!!!!!!!!!!!!!!!!!!!! - this is for maximisation.
+            diff = objVal_candidate - objVal_curr                   # negative, since the candidate is worse
+            # Metropolis criterion for a maximisation problem. diff is negative
+            # here, so the acceptance probability lies in (0, 1) and falls as
+            # the temperature cools.
+            acceptance_rate = np.exp(diff / temp_curr)
             rand_number = np.random.uniform()
             # print(f"deciding: acc rate = {acceptance_rate}, rand num = {rand_number}")
             if acceptance_rate > rand_number:  # accept candidate
@@ -433,96 +444,3 @@ def opt_metrics(road, host_pos, host_pop, optimal_sites):
     prop_red_allowed = num_red_optimal/ num_allowed
 
     return road_length, road_coverage_area, road_coverage_plant,RMS_toRoad_wtd,RMS_toRoad, RMS_toAllowed_wtd, RMS_toAllowed, RMS_toOpt_wtd, RMS_toOpt,num_red_optimal, num_red_allowed, prop_red_allowedred,prop_red_allowed
-
-
-
-###############################################################################
-####################### RUN OPTIMISATION ######################################
-###############################################################################
-
-# ### start time
-# start_time = datetime.datetime.now()
-# print('START TIME:', start_time, flush=True)
-
-# ### Set seed to ensure reproducability
-# np.random.seed(0)  
-
-# ### Read simulation data
-# sim_data = load(os.path.join(dir_home,subdir_sim,filename_sim))
-# print("num of simulations:", len(sim_data), "Survey_freq:", SURVEY_FREQ, "P(detect)=", P_DETECT, flush=True)
-
-# ### column bind the x and y coords of the points with hosts >=0 (2500 of them)
-# host_xpos = sim_data[0]['x']
-# host_ypos = sim_data[0]['y']
-# host_positions = np.column_stack((host_xpos, host_ypos))
-# host_population=sim_data[0]['host_population']
-
-# ### Obtain road
-# shp_road = read_road(file_dir= os.path.join(dir_home, subdir_road, filename_road))
-# site_loc_allowed_ID = site_loc_allowed(roadnetwork=shp_road, host_pos=host_positions, accessible_dist=1000)  # 1km accessibility
-
-
-
-# ### Plot road and allowed sites
-# #fig, ax = plt.subplots(figsize = (10,6))
-# #plt.scatter(host_positions[:, 0] ,host_positions[:, 1], marker='s', s=30, linewidths=0, edgecolors='none', alpha=0.5, c=host_population, cmap='RdYlGn_r')
-# #plt.scatter(host_positions[site_loc_allowed_ID, 0], host_positions[site_loc_allowed_ID, 1], marker='s', s=30, facecolors='none', edgecolors='black', label='sites allowed for survey')
-# #shp_road.plot(ax=ax, color='red', linewidth=1, label='road')
-# #plt.xlabel('x')
-# #plt.ylabel('y')
-# #plt.legend()
-# #plt.savefig(os.path.join(save_dir, 'plot_hostWithRoadRes.pdf'), dpi=600)
-# #plt.clf # clear figure
-# #plt.close(fig)
-
-
-# ### initial config (location of the surveillance sites). Set randomly (within road constraints) ================================
-# num_sites = 5  # number of sites to choose for surveillance
-# config0 = np.random.choice(site_loc_allowed_ID, size=min(len(site_loc_allowed_ID), num_sites), replace=False)  # choose sites randomly from the allowed locations
-# print('initial config:', config0, flush=True)
-# ### check if len(config0) < len(site_loc_allowed_ID)
-# print("Check validity of initial config0:", len(config0) < len(site_loc_allowed_ID), flush=True)
-
-# ### Optimisation (SA) ===========================================================================================================
-# n_iter = 50000 # 
-# temperature = 10  # find how to set initial temperature!!!!!!!!!!
-# cooling_rate = 0.9995 # # find how to set cooling rate!!!!!!!!!!
-# print(f'number of SA trials: {n_iter}, \tstarting temp:{temperature}, \tcooling rate:{cooling_rate}')
-
-# best_config, temp_list, objVal_list = simulated_annealing(data_sim=sim_data, obj_fun=objective_optimised, 
-#                                                         site_loc_allowed=site_loc_allowed_ID, config0=config0,
-#                                                         n_iterations=n_iter, init_temperature=temperature, cooling_rate=cooling_rate,
-#                                                         ntrees_survey=NTREES_SURVEY,P_detect=P_DETECT, survey_freq=SURVEY_FREQ) 
-
-
-# print("best config:",  best_config, flush=True)
-
-# ### Plot trace of objective value
-# fig, ax = plt.subplots(figsize = (10,6))
-# plt.plot(objVal_list , label = '')
-# #plt.xscale('log', base = 10)
-# plt.xlabel('Trial')
-# plt.ylabel('Objective value')
-# plt.title(f'Trace of SA ({n_iter} trials, start temp={temperature}, cooling rate={cooling_rate})')
-# # plt.legend()
-# plt.savefig(os.path.join(save_dir, f'plot_optimisationTrace_{method}_Pdetect{P_DETECT}.pdf'), dpi=600)
-# plt.clf # clear figure
-# plt.close(fig)
-
-# ### Plot optimisation result
-# fig, ax = plt.subplots(figsize = (10,6))
-# ax.scatter(host_positions[:, 0] ,host_positions[:, 1],  marker='s', s=30, linewidths=0, edgecolors='none', alpha=0.7, c=host_population, cmap='RdYlGn_r')
-# shp_road.plot(ax=ax, color='black', linewidth=1, label='road', alpha=0.5)
-# ax.scatter(host_positions[site_loc_allowed_ID, 0], host_positions[site_loc_allowed_ID, 1], marker='s', s=30, facecolors='none', edgecolors='black', label='sites allowed for survey', alpha=0.6)
-# ax.scatter(host_positions[best_config, 0], host_positions[best_config, 1], marker='x', s=20, c='black', label='optimal sites', alpha=0.6)
-# plt.xlabel('x')
-# plt.ylabel('y')
-# #plt.title('')
-# plt.legend()
-# plt.savefig(os.path.join(save_dir, f'plot_OptResult_{method}_Pdetect{P_DETECT}.pdf'), dpi=600)
-# plt.clf # clear figure
-# plt.close(fig)
-
-# end_time = datetime.datetime.now()
-# print("End time:", end_time, flush=True)
-# print("Time taken for simulation:", end_time - start_time, flush=True)

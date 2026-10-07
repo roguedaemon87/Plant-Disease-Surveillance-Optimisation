@@ -83,7 +83,7 @@ if __name__ == '__main__':
     host_distr, road_sub = host_distribution_casava(road=shp_road, area=shp_area, 
                                         x_bound=[1e6, 1e6+269000], y_bound=[3e5, 3e5+269000], 
                                         grid_level = True, plot_poly=False, plot_point=False,
-                                        plot_save_path=str(OUTPUT_DIR)
+                                        plot_save_path=str(OUTPUT_DIR))
 
     RATE=0.003120016864814313
     PREV_FINAL0=0.1067

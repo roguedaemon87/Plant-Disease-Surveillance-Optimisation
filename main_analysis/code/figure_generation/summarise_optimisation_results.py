@@ -73,14 +73,9 @@ from tqdm import tqdm
 from scipy.spatial.distance import cdist
 import pickle
 from matplotlib.colors import LinearSegmentedColormap
-import seaborn as sns
 from joblib import load, dump
 import geopandas as gpd
-#from esda.moran import Moran
-from libpysal.weights import lat2W, DistanceBand
 from scipy.spatial.distance import cdist, pdist
-from scipy.stats import kendalltau
-#from xicorrelation import xicorr
 import dcor
 
 

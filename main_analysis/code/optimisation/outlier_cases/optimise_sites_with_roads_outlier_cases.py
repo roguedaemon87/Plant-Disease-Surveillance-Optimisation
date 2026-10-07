@@ -166,9 +166,9 @@ print("Check validity of initial config0:", len(config0) < len(site_loc_allowed_
 
 
 ### Optimisation (SA) ===========================================================================================================
-n_iter =50000 # 
-temperature = 10  # find how to set initial temperature!!!!!!!!!!
-cooling_rate = 0.9995 # # find how to set cooling rate!!!!!!!!!!
+n_iter = 50000   # maximum iterations; the run stops earlier once the objective settles
+temperature = 10   # initial SA temperature
+cooling_rate = 0.9995   # geometric cooling factor applied each iteration
 print(f'number of SA trials: {n_iter}, \tstarting temp:{temperature}, \tcooling rate:{cooling_rate}')
 
 best_config,config_list, temp_list, objVal_list, n_iter_actual = simulated_annealing(data_sim=sim_data,   #===

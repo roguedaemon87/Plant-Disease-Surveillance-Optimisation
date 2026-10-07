@@ -33,8 +33,10 @@ import os
 #os.environ["OPENBLAS_NUM_THREADS"] = "1"
 #os.environ["MKL_NUM_THREADS"] = "1"
 import sys
-module_dir = '/home/physics/estszj/research_project'
-sys.path.append(module_dir)
+from pathlib import Path
+THIS_FILE = Path(__file__).resolve()
+PROJECT_ROOT = THIS_FILE.parents[4]  # main_analysis/code/nigeria_comparison/code/ -> repo root
+sys.path.insert(0, str(PROJECT_ROOT))
 
 from simulation import vlogistic
 from CONSTANT import ALPHA, BETA, SIGMA0, LOGISTIC_RATE, PREVALENCE, P_DETECT, NTREES_SURVEY, SURVEY_FREQ

@@ -1,0 +1,21 @@
+# Environment used for the analyses reported in the manuscript.
+# Python 3.11.5
+#
+#   python -m venv .venv
+#   source .venv/bin/activate        # Windows: .venv\Scripts\activate
+#   pip install -r requirements.txt
+
+numpy==2.4.6
+scipy==1.17.1
+shapely==2.1.2
+matplotlib==3.11.1
+joblib==1.5.3
+
+# VERSION TO BE CONFIRMED before release
+geopandas==1.14
+
+# Used by the analysis scripts but not pinned in the manuscript.
+# VERSIONS TO BE CONFIRMED before release
+pandas
+tqdm
+dcor
