@@ -138,7 +138,7 @@ for ax, factor, order, xlabel in [
         (axes[0], 'area', areas, 'Sub-landscape'),
         (axes[1], 'road', roads, 'Road network')]:
     data = [d.loc[d[factor] == k, 'OOP'].values for k in order]
-    bp = ax.boxplot(data, labels=order, patch_artist=True, widths=0.6,
+    bp = ax.boxplot(data, tick_labels=order, patch_artist=True, widths=0.6,
                     medianprops=dict(color='black', lw=1.2),
                     flierprops=dict(marker='o', ms=3, mfc='0.4',
                                     mec='none', alpha=0.7))

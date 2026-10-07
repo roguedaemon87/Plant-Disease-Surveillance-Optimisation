@@ -13,3 +13,6 @@ Thumbs.db
 
 .vscode/
 .idea/
+
+# generated figures
+main_analysis/Outputs/figures/
