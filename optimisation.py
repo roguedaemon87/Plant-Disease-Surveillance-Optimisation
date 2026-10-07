@@ -42,8 +42,6 @@ sys.path.insert(0, str(PROJECT_ROOT))
 # USER: if auto-detection fails, uncomment and set manually:
 # PROJECT_ROOT = Path(r"/path/to/your/repository")
 
-method = sys.argv[1]  # 'risk' or 'fix'
-
 from simulation import vlogistic
 from CONSTANT import ALPHA, BETA, SIGMA0, LOGISTIC_RATE, PREVALENCE, P_DETECT, NTREES_SURVEY, SURVEY_FREQ
 from multiprocessing import Pool

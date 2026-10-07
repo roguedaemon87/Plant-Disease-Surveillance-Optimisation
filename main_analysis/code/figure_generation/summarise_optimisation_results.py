@@ -88,7 +88,7 @@ NSITES = NSITES_JA
 cwd = PROJECT_ROOT / "main_analysis" / "Outputs"
 
 dir_host_distr = PROJECT_ROOT / "main_analysis" / "host_distributions"
-dir_infection_visit = cwd / "derived_inputs" / "infection_visit_count"
+dir_infection_visit = cwd / "infection_visit_counts"
 
 dir_metric = cwd / f"optimisation/output_metric_sfreq{SURVEY_FREQ}_nsite{NSITES}"
 dir_config = cwd / "optimisation" / "output_config"
