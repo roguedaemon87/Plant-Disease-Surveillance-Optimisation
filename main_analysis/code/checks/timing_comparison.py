@@ -13,10 +13,11 @@ cells may be proposed, not the cost of evaluating a proposal.
 
 USAGE
 -----
-Edit the PATHS block, then: python timing_check.py
+python main_analysis/code/checks/timing_comparison.py
 """
 
 import time
+from pathlib import Path
 import numpy as np
 import geopandas as gpd
 from shapely.ops import unary_union
@@ -24,14 +25,15 @@ from shapely.geometry import Point
 from joblib import load
 
 # ==========================================================================
-# EDIT THESE
-# ==========================================================================
+# All paths are resolved relative to the repository root.
+THIS_FILE = Path(__file__).resolve()
+PROJECT_ROOT = THIS_FILE.parents[3]
+
 AREA = "01"
+ROAD = "01_0"
 
-SIM_FILE = r"G:\Assessments\Postdoc\Warwick\Cassava Project\Biqing's Paper\data for figures\2000 simulations of spread model in each host distribution\df_sims01.joblib"
-
-# The road shapefile matching this area (road01.shp or equivalent)
-ROAD_FILE = r"G:\Assessments\Postdoc\Warwick\Cassava Project\Biqing's Paper\road networks\roadnetwork01_0.shp"
+SIM_FILE  = PROJECT_ROOT / "main_analysis" / "Outputs" / "simulations" / f"df_sims{AREA}.joblib"
+ROAD_FILE = PROJECT_ROOT / "main_analysis" / "road_patterns" / f"roadnetwork{ROAD}.shp"
 # ==========================================================================
 
 NSITES = 10
