@@ -29,7 +29,25 @@ Output is written to `main_analysis/Outputs/figures/`.
 | `figureS12.py` | Figure S12, the study areas falling furthest below the fitted RCP-OOP trend | optimisation, host distributions, road networks, infection visit counts |
 | `figureS13.py` | Figure S13, controlled test cases for the hotspot explanation | outlier cases, main optimisation |
 | `figureS14.py` | Figure S14, annealing traces for the five Nigerian states | Nigeria comparison |
-| `summarise_optimisation_results.py` | Site-level metrics reported in Supplementary Table S3 | optimisation, host distributions |
+| `summarise_optimisation_results.py` | Site-level metrics reported in Supplementary Table S3 | optimisation, host distributions, infection visit counts |
+
+## One script needs arguments and an archive
+
+`summarise_optimisation_results.py` is the exception to everything above. It
+takes the survey frequency and the number of sites as arguments, and it reads
+the annealing traces and configurations, which are held as per-intensity
+archives rather than loose files. Extract the pair you want first:
+
+```
+cd main_analysis/Outputs/optimisation
+tar xzf archives/output_trace_sfreq52_nsite10.tar.gz
+tar xzf archives/output_config_sfreq52_nsite10.tar.gz
+cd -
+python main_analysis/code/figure_generation/summarise_optimisation_results.py 52 10
+```
+
+Without the extraction it stops with a `FileNotFoundError` on the first trace
+file. See `main_analysis/Outputs/optimisation/archives/README.md`.
 
 ## Where the inputs live
 

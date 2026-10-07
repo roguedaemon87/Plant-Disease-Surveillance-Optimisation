@@ -148,6 +148,22 @@ def process_area(args):
 
 
 if __name__ == "__main__":
+    # The noisy simulation sets are not committed (see the README in
+    # Outputs/noise_test/). Without them this script would otherwise run to
+    # completion and overwrite noise_test_scores.csv with only the baseline
+    # columns, which is what Figure S8 is built from. Check first and stop.
+    expected = [f"df_sims{a:02d}_noise{n}.joblib"
+                for a in range(1, 9) for n in [0.0] + NOISE_LEVELS]
+    missing = [f for f in expected if not os.path.exists(os.path.join(DIR_NOISY, f))]
+    if missing:
+        raise SystemExit(
+            f"{len(missing)} of {len(expected)} noisy simulation files are missing "
+            f"from {DIR_NOISY}.\n"
+            "These are not distributed with the repository. Generate them with step 1 "
+            "of this test, or see the README in that directory.\n"
+            "Stopping rather than writing a partial noise_test_scores.csv, which "
+            "Figure S8 is built from.")
+
     files = sorted(glob.glob(os.path.join(DIR_METRIC, "metric_*.joblib")))
     metrics = [load(f) for f in files]
     by_area = {}
