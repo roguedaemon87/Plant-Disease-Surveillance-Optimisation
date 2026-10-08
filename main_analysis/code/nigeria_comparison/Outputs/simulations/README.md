@@ -10,7 +10,7 @@ administrative units rather than 50 km by 50 km sub-landscapes, so each set of
 2,000 simulations is far larger than the equivalent file for the main analysis,
 and the five together exceed what can reasonably be hosted here.
 
-They are deposited at <https://doi.org/10.5281/zenodo.23214313>, as `nigeria_simulations.7z`. Extract that
+They are deposited at <https://doi.org/10.17632/fw6mk5hsmx.1>, as `nigeria_simulations.7z`. Extract that
 archive into this directory.
 
 The `kernels/` subdirectory is where `run_sims_nigeria.py` writes the precomputed

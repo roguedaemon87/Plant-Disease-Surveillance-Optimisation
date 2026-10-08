@@ -7,4 +7,4 @@ The main analysis uses precomputed host distributions in main_analysis/.
 Subfolders:
 - code/: beta sweep scripts
 - Outputs/: calibration results
-- shapefiles_raw/: raw GIS inputs (not hosted due to file size)
+- shapefiles_raw/: raw GIS inputs (deposited separately, see that folder's README)
